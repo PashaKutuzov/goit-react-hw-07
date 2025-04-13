@@ -3,7 +3,7 @@ import "./App.css";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import SearchBox from "./SearchBox";
-import { fetchContacts } from "../redux/tasksOps";
+import { fetchContacts } from "../redux/contactsOps";
 import {
   selectContacts,
   selectIsLoading,

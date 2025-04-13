@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../redux/tasksOps";
+import { deleteContact } from "../redux/contactsOps";
 
 export default function Contact({ data }) {
   const dispatch = useDispatch();
