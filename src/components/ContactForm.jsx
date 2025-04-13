@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { addContact } from "../redux/contactsSlice";
+import { addContact } from "../redux/tasksOps";
 import * as Yup from "yup";
 import css from "./ContactsStyle/ContactForm.module.css";
 import { useDispatch } from "react-redux";
@@ -8,23 +8,16 @@ export default function ContactForm() {
   const dispatch = useDispatch();
 
   const handleSummit = (values, actions) => {
-    console.log("submit", values);
-    dispatch(
-      addContact({
-        id: Date.now(),
-        name: values.username,
-        number: values.telephone,
-      })
-    );
+    dispatch(addContact(values));
     actions.resetForm();
   };
 
   const UserSchema = Yup.object().shape({
-    username: Yup.string()
+    name: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    telephone: Yup.string()
+    number: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
@@ -32,8 +25,8 @@ export default function ContactForm() {
   return (
     <Formik
       initialValues={{
-        username: "",
-        telephone: "",
+        name: "",
+        number: "",
       }}
       onSubmit={handleSummit}
       validationSchema={UserSchema}
@@ -41,7 +34,7 @@ export default function ContactForm() {
       <Form className={css.form}>
         <div className={css.containerInput}>
           <label>Username</label>
-          <Field className={css.input} type="taxt" name="username" />
+          <Field className={css.input} type="text" name="name" />
           <ErrorMessage
             className={css.error}
             name="username"
@@ -51,7 +44,7 @@ export default function ContactForm() {
 
         <div className={css.containerInput}>
           <label>Tel number</label>
-          <Field className={css.input} type="number" name="telephone" />
+          <Field className={css.input} type="number" name="number" />
           <ErrorMessage
             className={css.error}
             name="telephone"
